@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "DoublyLinkedList.h"
+#include "LinkedList.h"
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e);
 
