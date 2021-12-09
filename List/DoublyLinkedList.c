@@ -10,6 +10,7 @@ void listInit(List* list) {
     list->trailer = getNode(NULL, NULL, NULL_ELEMENT);
     list->header->next = list->trailer;
     list->trailer->prev = list->header;
+    list->func = NULL;
 }
 
 void listAdd(List* list, int r, Element e) {
@@ -72,13 +73,24 @@ Element listGet(List* list, int r) {
     return p->elem;
 }
 
-void listPrint(List* list) {
+void listTraversal(List* list) {
     Node* p = list->header;
 
-    for (int i = 0; i < list->size; i++) {
-        p = p->next;
-        printf("%d ", p->elem);
-    } printf("\n");
+    if (list->func == NULL) {
+        for (int i = 0; i < list->size; i++) {
+            p = p->next;
+            printf("%d ", p->elem);
+        } printf("\n");
+    } else {
+        for (int i = 0; i < list->size; i++) {
+            p = p->next;
+            func(p->elem);
+        } printf("\n");
+    }
+}
+
+void listSetTraversalFunction(List* list, int (*func)(Element* elements)) {
+    list->func = func;
 }
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e) {
