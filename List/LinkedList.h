@@ -3,7 +3,12 @@
 
 #define NULL_ELEMENT    -1
 
-typedef int Element;
+typedef struct _data {
+    int exponent;
+    int coefficient;
+} Data;
+
+typedef Data Element;
 
 typedef struct _node {
     Element elem;
