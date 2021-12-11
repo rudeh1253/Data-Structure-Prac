@@ -12,8 +12,8 @@ List* getPolynomialList(int numArr[], int arrLen) {
 
     for (int i = 0; i < arrLen; i += 2) {
         Element element = (Element)malloc(sizeof(Data));
-        element->coefficient = numArr[i];
-        element->exponent = numArr[i + 1];
+        element->data2 = numArr[i];
+        element->data1 = numArr[i + 1];
         listAdd(polynomialList, i / 2, element);
     }
 
@@ -46,17 +46,17 @@ List* calPolynomial(List* aPolynomial, List* bPolynomial) {
         a = listGet(aPolynomial, aIdx);
         b = listGet(bPolynomial, bIdx);
 
-        if (a->exponent > b->exponent) {
+        if (a->data1 > b->data1) {
             listAdd(result, rIdx++, a);
             aIdx++;
-        } else if (a->exponent < b->exponent) {
+        } else if (a->data1 < b->data1) {
             listAdd(result, rIdx++, b);
             bIdx++;
         } else {
             c = (Element)malloc(sizeof(Data));
-            c->coefficient = a->coefficient;
-            c->coefficient += b->coefficient;
-            c->exponent = a->exponent;
+            c->data2 = a->data2;
+            c->data2 += b->data2;
+            c->data1 = a->data1;
             listAdd(result, rIdx++, c);
             aIdx++; bIdx++;
             free(a);
@@ -92,8 +92,8 @@ int main() {
     Element e;
     for (int i = 0; i < resultList->size; i++) {
         e = listGet(resultList, i);
-        if (e->coefficient != 0) {
-            printf("%d %d ", e->coefficient, e->exponent);
+        if (e->data2 != 0) {
+            printf("%d %d ", e->data2, e->data1);
         }
 
         if (e != NULL) { free(e); }

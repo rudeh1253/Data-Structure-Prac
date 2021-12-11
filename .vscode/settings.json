@@ -2,6 +2,8 @@
     "files.associations": {
         "stdio.h": "c",
         "linkedlist.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "limits": "c",
+        "*.tcc": "c"
     }
 }

@@ -6,8 +6,8 @@ Node* getNode(Node* prevNode, Node* nextNode, Element e);
 
 void listInit(List* list) {
     list->size = 0;
-    list->header = getNode(NULL, NULL, NULL_ELEMENT);
-    list->trailer = getNode(NULL, NULL, NULL_ELEMENT);
+    list->header = getNode(NULL, NULL, NULL_ELEM);
+    list->trailer = getNode(NULL, NULL, NULL_ELEM);
     list->header->next = list->trailer;
     list->trailer->prev = list->header;
     list->func = NULL;
@@ -40,14 +40,14 @@ Element listDelete(List* list, int r) {
     if (r < 0 || r >= list->size) {
         printf("invalid position\n");
 
-        return NULL_ELEMENT;
+        return NULL_ELEM;
     }
 
     Node* p = list->header->next;
     if (p == list->trailer) {
         printf("List is empty\n");
 
-        return NULL_ELEMENT;
+        return NULL_ELEM;
     }
 
     for (int i = 0; i < r; i++) {
@@ -70,14 +70,14 @@ Element listGet(List* list, int r) {
     if (r < 0 || r >= list->size) {
         printf("invalid position\n");
 
-        return NULL_ELEMENT;
+        return NULL_ELEM;
     }
 
     Node* p = list->header->next;
     if (p == list->trailer) {
         printf("List is empty\n");
 
-        return NULL_ELEMENT;
+        return NULL_ELEM;
     }
 
     for (int i = 0; i < r; i++) {

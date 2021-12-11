@@ -3,12 +3,12 @@
 
 #include <stdbool.h>
 
-#define NULL_ELEMENT    NULL
+#define NULL_ELEM    NULL
 
 // temporary define of Data for solving problem of number 5
 typedef struct _data {
-    int exponent;
-    int coefficient;
+    int data1;
+    int data2;
 } Data;
 
 typedef Data* Element;
@@ -38,5 +38,7 @@ void listTraverse(List* list);
 void listDestroy(List* list);
 
 void listSetTraversalFunction(List* list, _Bool (*func)(Element elements));
+
+void listPrintAll(List* list);
 
 #endif

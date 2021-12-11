@@ -4,7 +4,7 @@
 #include "./List/LinkedList.h"
 
 _Bool func(Element elements) {
-    printf("%d ", elements->coefficient);
+    printf("%d ", elements->data2);
 
     return true;
 }
@@ -17,7 +17,7 @@ int main() {
 
     for (int i = 0; i < 100; i++) {
         Element e = (Element)malloc(sizeof(Data));
-        e->coefficient = (i + 1) * 2;
+        e->data2 = (i + 1) * 2;
         listAdd(l, 0, e);
     }
     listTraverse(l);
@@ -34,8 +34,8 @@ int main() {
 
     Element j;
     int i = 0;
-    while ((j = listGet(l, i++)) != NULL_ELEMENT) {
-        printf("%d ", j->coefficient);
+    while ((j = listGet(l, i++)) != NULL_ELEM) {
+        printf("%d ", j->data2);
     }
     printf("\n");
 
