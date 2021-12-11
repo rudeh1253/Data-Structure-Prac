@@ -1,14 +1,16 @@
 #ifndef __LINKED_LIST_H_
 #define __LINKED_LIST_H_
 
-#define NULL_ELEMENT    -1
+#include <stdbool.h>
+
+#define NULL_ELEMENT    NULL
 
 typedef struct _data {
     int exponent;
     int coefficient;
 } Data;
 
-typedef Data Element;
+typedef Data* Element;
 
 typedef struct _node {
     Element elem;
@@ -20,7 +22,7 @@ typedef struct _linked_list {
     int size;
     Node* header;
     Node* trailer;
-    int (*func)(Element* elements);
+    _Bool (*func)(Element elements);
 } LinkedList;
 
 typedef LinkedList List;
@@ -32,6 +34,6 @@ Element listDelete(List* list, int r);
 Element listGet(List* list, int r);
 void listTraverse(List* list);
 
-void listSetTraversalFunction(List* list, int (*func)(Element* elements));
+void listSetTraversalFunction(List* list, _Bool (*func)(Element elements));
 
 #endif

@@ -14,14 +14,14 @@ void listInit(List* list) {
 }
 
 void listAdd(List* list, int r, Element e) {
-    if (r < 1 || r > list->size + 1) {
+    if (r < 0 || r > list->size) {
         printf("invalid position\n");
 
         return;
     }
 
     Node* p = list->header;
-    for (int i = 0; i < r - 1; i++) {
+    for (int i = 0; i < r; i++) {
         p = p->next;
     }
 
@@ -37,59 +37,75 @@ void listAdd(List* list, int r, Element e) {
 }
 
 Element listDelete(List* list, int r) {
-    if (r < 1 || r > list->size) {
+    if (r < 0 || r >= list->size) {
         printf("invalid position\n");
 
         return NULL_ELEMENT;
     }
 
-    Node* p = list->header;
-    for (int i = 0; i < r - 1; i++) {
+    Node* p = list->header->next;
+    if (p == list->trailer) {
+        printf("List is empty\n");
+
+        return NULL_ELEMENT;
+    }
+
+    for (int i = 0; i < r; i++) {
         p = p->next;
     }
 
     Node* deletedNode = p;
+    Element elem = p->elem;
+
     deletedNode->prev->next = deletedNode->next;
     deletedNode->next->prev = deletedNode->prev;
     free(deletedNode);
 
     list->size--;
 
-    return deletedNode->elem;
+    return elem;
 }
 
 Element listGet(List* list, int r) {
-    if (r < 1 || r > list->size) {
+    if (r < 0 || r >= list->size) {
         printf("invalid position\n");
 
         return NULL_ELEMENT;
     }
 
-    Node* p = list->header;
-    for (int i = 0; i < r - 1; i++) {
+    Node* p = list->header->next;
+    if (p == list->trailer) {
+        printf("List is empty\n");
+
+        return NULL_ELEMENT;
+    }
+
+    for (int i = 0; i < r; i++) {
         p = p->next;
     }
 
     return p->elem;
 }
 
-void listTraversal(List* list) {
+void listTraverse(List* list) {
     Node* p = list->header;
 
     if (list->func == NULL) {
         for (int i = 0; i < list->size; i++) {
             p = p->next;
-            printf("%d ", p->elem);
+            printf("%p ", p->elem);
         } printf("\n");
     } else {
         for (int i = 0; i < list->size; i++) {
             p = p->next;
-            func(p->elem);
+            if (!list->func(p->elem)) {
+                break;
+            }
         } printf("\n");
     }
 }
 
-void listSetTraversalFunction(List* list, int (*func)(Element* elements)) {
+void listSetTraversalFunction(List* list, _Bool (*func)(Element elements)) {
     list->func = func;
 }
 
