@@ -54,9 +54,11 @@ List* calPolynomial(List* aPolynomial, List* bPolynomial) {
             bIdx++;
         } else {
             c = (Element)malloc(sizeof(Data));
-            c->coefficient = (a->coefficient) + (b->coefficent);
-            c->exponent = a->coefficient;
+            c->coefficient = a->coefficient;
+            c->coefficient += b->coefficient;
+            c->exponent = a->exponent;
             listAdd(result, rIdx++, c);
+            aIdx++; bIdx++;
             free(a);
             free(b);
         }
@@ -90,7 +92,9 @@ int main() {
     Element e;
     for (int i = 0; i < resultList->size; i++) {
         e = listGet(resultList, i);
-        printf("%d %d ", e->coefficient, e->exponent);
+        if (e->coefficient != 0) {
+            printf("%d %d ", e->coefficient, e->exponent);
+        }
 
         if (e != NULL) { free(e); }
     } printf("\n");
