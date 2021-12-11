@@ -5,6 +5,7 @@
 
 #define NULL_ELEMENT    NULL
 
+// temporary define of Data for solving problem of number 5
 typedef struct _data {
     int exponent;
     int coefficient;
