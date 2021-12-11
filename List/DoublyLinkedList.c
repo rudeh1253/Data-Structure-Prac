@@ -105,6 +105,18 @@ void listTraverse(List* list) {
     }
 }
 
+void listDestroy(List* list) {
+    for (int i = 0; i < list->size; i++) {
+        listDelete(list, i);
+    }
+    if (list->header != NULL) {
+        free(list->header);
+    }
+    if (list->trailer != NULL) {
+        free(list->trailer);
+    }
+}
+
 void listSetTraversalFunction(List* list, _Bool (*func)(Element elements)) {
     list->func = func;
 }

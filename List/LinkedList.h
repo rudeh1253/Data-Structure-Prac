@@ -34,6 +34,8 @@ Element listDelete(List* list, int r);
 Element listGet(List* list, int r);
 void listTraverse(List* list);
 
+void listDestroy(List* list);
+
 void listSetTraversalFunction(List* list, _Bool (*func)(Element elements));
 
 #endif
