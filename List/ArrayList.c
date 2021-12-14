@@ -14,7 +14,7 @@ void printException(char* exceptionName);
 
 void listInit(List* list) {
     list->size = 0;
-    list->fullSize = 10;
+    list->fullSize = EXTENDED_SIZE;
     list->container = (Element*)malloc(sizeof(Element) * list->fullSize);
 }
 
