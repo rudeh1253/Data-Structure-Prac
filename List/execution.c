@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "./List/LinkedList.h"
+#include "LinkedList.h"
 
 _Bool func(Element elements) {
     printf("%d ", elements->data2);

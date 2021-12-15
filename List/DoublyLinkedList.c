@@ -3,6 +3,10 @@
 #include "LinkedList.h"
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e);
+void listAddHere(List* list, int r, Element e);
+void listAddSorted(List* list, Element e);
+void linkNode(List* list, Node* front, Node* back);
+_Bool compare(Element e1, Element e2);
 
 void listInit(List* list) {
     list->size = 0;
@@ -11,6 +15,11 @@ void listInit(List* list) {
     list->header->next = list->trailer;
     list->trailer->prev = list->header;
     list->func = NULL;
+    list->comparator = compare;
+}
+
+_Bool compare(Element e1, Element e2) {
+    return e1->data1 < e2->data1;
 }
 
 void listAdd(List* list, int r, Element e) {
@@ -25,15 +34,45 @@ void listAdd(List* list, int r, Element e) {
         p = p->next;
     }
 
-/*
+    Node* newNode = getNode(p, p->next, e);
+    linkNode(list, p, newNode);
+}
+
+void listAddSorted(List* list, Element e) {
+    Node* p = list->header->next;
+    while (list->comparator(p->elem, e)) {
+        p = p->next;
+    }
+
+    Node* newNode = getNode(p, p->next, e);
+    linkNode(list, newNode, p);
+}
+
+void linkNode(List* list, Node* front, Node* back) {
+    /*
     Node* newNode = getNode(p->prev, p, e);
     p->next->prev = newNode;
     p->next = newNode;*/
-    Node* newNode = getNode(p, p->next, e);
-    p->next->prev = newNode;
-    p->next = newNode;
+
+    front->next->prev = back;
+    front->next = back;
 
     list->size++;
+}
+
+Node* getNode(Node* prevNode, Node* nextNode, Element e) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    node->prev = prevNode;
+    node->next = nextNode;
+    node->elem = e;
+}
+
+void listAddFirst(List* list, Element e) {
+    listAdd(list, 0, e);
+}
+
+void listAddLast(List* list, Element e) {
+    listAdd(list, list->size, e);
 }
 
 Element listDelete(List* list, int r) {
@@ -64,6 +103,14 @@ Element listDelete(List* list, int r) {
     list->size--;
 
     return elem;
+}
+
+Element listDeleteFirst(List* list) {
+    // TODO
+}
+
+Element listDeleteLast(List* list) {
+    // TODO
 }
 
 Element listGet(List* list, int r) {
@@ -121,9 +168,6 @@ void listSetTraversalFunction(List* list, _Bool (*func)(Element elements)) {
     list->func = func;
 }
 
-Node* getNode(Node* prevNode, Node* nextNode, Element e) {
-    Node* node = (Node*)malloc(sizeof(Node));
-    node->prev = prevNode;
-    node->next = nextNode;
-    node->elem = e;
+void listSetComparator(List* list, _Bool (*comparator)(Element element1, Element element2)) {
+    list->comparator = comparator;
 }
