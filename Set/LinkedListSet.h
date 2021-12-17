@@ -4,9 +4,11 @@
 #include <stdbool.h>
 #include "../List/LinkedList.h"
 
-typedef void* SetElem;
+typedef Element SetElem;
 
 typedef List Set;
+
+void setInit(Set* set);
 
 int setSize(Set* set);
 _Bool setIsEmpty(Set* set);
