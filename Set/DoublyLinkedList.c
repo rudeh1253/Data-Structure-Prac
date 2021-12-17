@@ -24,6 +24,11 @@ _Bool compare(Element e1, Element e2) {
     return *((int*)e1) < *((int*)e2);
 }
 
+_Bool listIsEmpty(List* list) {
+
+    return list->size == 0;
+}
+
 _Bool listToFirst(List* list) {
     if (list->header->next == list->trailer) {
         

@@ -1,33 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include "LinkedList.h"
 #include "LinkedListSet.h"
 
-_Bool setDefaultComparator(Element e1, Element e2) {
+_Bool setListDefaultComparator(SetElem e1, SetElem e2);
+_Bool setDefaultEqualityComparator(SetElem e1, SetElem e2);
+
+void setInit(Set* set) {
+    set->list = (List*)malloc(sizeof(List));
+    listInit(set->list);
+    listSetComparator(set->list, setListDefaultComparator);
+    set->equalityComparator = setDefaultEqualityComparator;
+}
+
+_Bool setDefaultEqualityComparator(SetElem e1, SetElem e2) {
+
+    return *((int*)e1) == *((int*)e2);
+}
+
+_Bool setListDefaultComparator(SetElem e1, SetElem e2) {
     int* a = (int*)e1;
     int* b = (int*)e2;
 
     return *a < *b;
 }
 
-void setInit(Set* set) {
-    listInit(set);
-    listSetComparator(set, setDefaultComparator);
-}
-
 int setSize(Set* set) {
 
-    return set->size;
+    return set->list->size;
 }
 
 _Bool setIsEmpty(Set* set) {
 
-    return set->size == 0;
+    return set->list->size == 0;
 }
 
 _Bool setIsMember(Set* set, SetElem e) {
-    Node* p = set->header;
+    if (!listToFirst(set->list)) {
+        printf("set is empty\n");
 
-    while (p = p->next != set->trailer) {
-        if (p->elem == e) {
+        return false;
+    }
+
+    if (set->equalityComparator(listGet(set->list), e)) {
+
+        return true;
+    }
+
+    while (listToNext(set->list)) {
+        if (set->equalityComparator(listGet(set->list), e)) {
 
             return true;
         }
@@ -37,50 +59,66 @@ _Bool setIsMember(Set* set, SetElem e) {
 }
 
 _Bool isSubset(Set* setA, Set* setB) {
-    Node* pa = setA->header;
-    Node* pb = setB->header;
+    if (!listToFirst(setB->list)) {
+        if (!listToFirst(setA->list)) {
 
-    while (true) {
-        pa = pa->next;
-        if (pa == setA->trailer) {
-            break;
+            return true;
+        } else {
+
+            return false;
         }
+    } else {
+        if (!listToFirst(setA->list)) {
 
-        while (pb = pb->next != setB->trailer) {
-            if (pa->elem == pb->elem) {
-                break;
-            } else {
+            return true;
+        } else if (!setIsMember(setB, listGet(setA->list))) {
 
-                return false;
-            }
+            return false;
         }
-        pb = setB->header;
     }
+
+    while (listToNext(setA->list)) {
+        if (!setIsMember(setB, listGet(setA->list))) {
+            
+            return false;
+        }
+    }
+
+    return true;
 }
 
 void setAdd(Set* set, SetElem e) {
-    listAddByOrder(set, e);
+    if (setIsMember(set, e)) { return; }
+
+    listAddByOrder(set->list, e);
 }
 
 SetElem setRemove(Set* set, SetElem e) {
-    if (!listToFirst(set)) {
-        printf("cannot remove set element\n");
+    if (!listToFirst(set->list)) {
+        // if DoublyLinkedList.listToFirst is modified, it should be modified here too.
+        printf("set is empty\n");
 
-        return false;
+        return NULL;
     }
 
-    Element pe;
-
-    if (pe = listGet(set) == pe) {
-
-        return pe;
+    if (set->equalityComparator(listGet(set->list), e)) {
+        listDelete(set->list);
     }
 
-    while (listToNext(set)) {
-        if (listGet(set == e)) {
-            
+    while (listToNext(set->list)) {
+        if (set->equalityComparator(listGet(set->list), e)) {
+
+            return listDelete(set->list);
         }
     }
+
+    printf("No such element\n");
+
+    return NULL;
 }
 
-void emptySetException();   
+void emptySetException();
+
+void setEqualityComparator(Set* set, _Bool (*equalityComparator)(SetElem e1, SetElem e2)) {
+    set->equalityComparator = equalityComparator;
+}

@@ -26,6 +26,8 @@ typedef LinkedList List;
 
 void listInit(List* list);
 
+_Bool listIsEmpty(List* list);
+
 _Bool listToFirst(List* list);
 _Bool listToNext(List* list);
 

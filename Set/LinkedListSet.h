@@ -6,7 +6,12 @@
 
 typedef Element SetElem;
 
-typedef List Set;
+typedef struct _linked_list_set {
+    List* list;
+    _Bool (*equalityComparator)(SetElem e1, SetElem e2);
+} LinkedListSet;
+
+typedef LinkedListSet Set;
 
 void setInit(Set* set);
 
@@ -15,11 +20,13 @@ _Bool setIsEmpty(Set* set);
 // iterator elemtents()
 
 _Bool setIsMember(Set* set, SetElem e);
-_Bool isSubset(Set* setA, Set* setB);
+_Bool isSubset(Set* setA, Set* setB); // whether setA is a subset of setB; if setA is a subset of setB, return true, or not, return false
 
 void setAdd(Set* set, SetElem e);
 SetElem setRemove(Set* set, SetElem e);
 
-void emptySetException();   
+void emptySetException();
+
+void setEqualityComparator(Set* set, _Bool (*equalityComparator)(SetElem e1, SetElem e2));
 
 #endif
