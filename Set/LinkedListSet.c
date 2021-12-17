@@ -88,7 +88,15 @@ _Bool isSubset(Set* setA, Set* setB) {
 }
 
 void setAdd(Set* set, SetElem e) {
-    if (setIsMember(set, e)) { return; }
+    if (!listToFirst(set->list)) {
+        listAddByOrder(set->list, e);
+
+        return;
+    }
+
+    if (setIsMember(set, e)) {
+        return;
+    }
 
     listAddByOrder(set->list, e);
 }
