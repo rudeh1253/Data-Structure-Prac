@@ -34,7 +34,7 @@ void listInit(List* list);
 void listAdd(List* list, int r, Element e);
 void listAddFirst(List* list, Element e);
 void listAddLast(List* list, Element e);
-void listAddSorted(List* list, Element e);
+void listAddByOrder(List* list, Element e);
 
 Element listDelete(List* list, int r);
 Element listDeleteFirst(List* list);

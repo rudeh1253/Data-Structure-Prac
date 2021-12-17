@@ -4,7 +4,7 @@
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e);
 void listAddHere(List* list, int r, Element e);
-void listAddSorted(List* list, Element e);
+void listAddByOrder(List* list, Element e);
 void linkNode(List* list, Node* front, Node* back);
 _Bool compare(Element e1, Element e2);
 
@@ -38,7 +38,7 @@ void listAdd(List* list, int r, Element e) {
     linkNode(list, p, newNode);
 }
 
-void listAddSorted(List* list, Element e) {
+void listAddByOrder(List* list, Element e) {
     Node* p = list->header->next;
     while (list->comparator(p->elem, e)) {
         p = p->next;

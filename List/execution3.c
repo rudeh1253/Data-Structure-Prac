@@ -21,7 +21,7 @@ int main() {
     for (int i = 0; i < 20; i++) {
         Element e = (Element)malloc(sizeof(Data));
         e->data1 = rand() % 100;
-        listAddSorted(list, e);
+        listAddByOrder(list, e);
     }
 
     for (int i = 0; i < 20; i++) {
