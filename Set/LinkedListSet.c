@@ -4,26 +4,17 @@
 #include "LinkedList.h"
 #include "LinkedListSet.h"
 
-_Bool setListDefaultComparator(SetElem e1, SetElem e2);
 _Bool setDefaultEqualityComparator(SetElem e1, SetElem e2);
 
 void setInit(Set* set) {
     set->list = (List*)malloc(sizeof(List));
     listInit(set->list);
-    listSetComparator(set->list, setListDefaultComparator);
     set->equalityComparator = setDefaultEqualityComparator;
 }
 
 _Bool setDefaultEqualityComparator(SetElem e1, SetElem e2) {
 
     return *((int*)e1) == *((int*)e2);
-}
-
-_Bool setListDefaultComparator(SetElem e1, SetElem e2) {
-    int* a = (int*)e1;
-    int* b = (int*)e2;
-
-    return *a < *b;
 }
 
 int setSize(Set* set) {
@@ -95,6 +86,7 @@ void setAdd(Set* set, SetElem e) {
     }
 
     if (setIsMember(set, e)) {
+        
         return;
     }
 
