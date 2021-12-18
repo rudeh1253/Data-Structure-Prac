@@ -215,3 +215,16 @@ void listSetTraversalFunction(List* list, _Bool (*func)(Element elements)) {
 void listSetComparator(List* list, _Bool (*comparator)(Element element1, Element element2)) {
     list->comparator = comparator;
 }
+
+void listPrintAll(List* list, void (*printFunc)(Element* e)) {
+    if (!listToFirst(list)) {
+
+        return;
+    }
+
+    printFunc(listGet(list));
+
+    while (listToNext(list)) {
+        printFunc(listGet(list));
+    }
+}

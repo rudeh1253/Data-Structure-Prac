@@ -50,6 +50,6 @@ void listDestroy(List* list);
 void listSetTraversalFunction(List* list, _Bool (*func)(Element elements));
 void listSetComparator(List* list, _Bool (*comparator)(Element element1, Element element2));
 
-void listPrintAll(List* list);
+void listPrintAll(List* list, void (*printFunc)(Element* e));
 
 #endif
