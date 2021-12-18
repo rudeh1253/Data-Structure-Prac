@@ -30,13 +30,13 @@ int main() {
     int intArr2[] = { 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19 };
     int arrLen2 = sizeof(intArr2) / sizeof(int);
     void** arr2 = (void**)malloc(arrLen2 * sizeof(void*));
-    
+
     for (int i = 0; i < arrLen2; i++) {
         arr2[i] = malloc(sizeof(void*));
         arr2[i] = &intArr2[i];
     }
 
-    for (int i = 0; i < arrLen1; i++) {
+    for (int i = 0; i < arrLen2; i++) {
         setAdd(&s3, arr2[i]);
         printf("%d ", *(int*)arr2[i]);
     } printf("\n");

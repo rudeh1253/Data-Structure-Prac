@@ -4,7 +4,7 @@ OBJS=execution1.o LinkedListSet.o DoublyLinkedList.o
 TARGET=a.out
 
 $(TARGET): $(OBJS)
-	$(CC) -g $(OBJS)
+	$(CC) $(OBJS)
 
 execution1.o: Set/LinkedListSet.h Set/execution1.c
 	$(CC) $(OBJFLAGS) $@ Set/execution1.c
