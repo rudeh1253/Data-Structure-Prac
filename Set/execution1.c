@@ -76,5 +76,20 @@ int main() {
         printf("nothing2\n");
     }
 
+    for (int i = 5; i < 10; i++) {
+        num = i;
+        setRemove(&s1, pNumTen);
+    }
+
+    printf("size of s1: %d\n", setSize(&s1));
+    for (int i = 1; i < 11; i++) {
+        num = i;
+        if (setIsMember(&s1, pNumTen)) {
+            printf("%d is member of s1\n", num);
+        } else {
+            printf("%d is not member of s1\n", num);
+        }
+    }
+
     return 0;
 }

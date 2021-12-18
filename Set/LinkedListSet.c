@@ -86,7 +86,7 @@ void setAdd(Set* set, SetElem e) {
     }
 
     if (setIsMember(set, e)) {
-        
+
         return;
     }
 
@@ -102,7 +102,8 @@ SetElem setRemove(Set* set, SetElem e) {
     }
 
     if (set->equalityComparator(listGet(set->list), e)) {
-        listDelete(set->list);
+
+        return listDelete(set->list);
     }
 
     while (listToNext(set->list)) {

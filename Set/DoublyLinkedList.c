@@ -3,7 +3,6 @@
 #include "LinkedList.h"
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e);
-//void linkNode(List* list, Node* front, Node* back);
 _Bool compare(Element e1, Element e2);
 
 void listInit(List* list) {
@@ -62,7 +61,6 @@ void listAdd(List* list, int r, Element e) {
     }
 
     Node* newNode = getNode(p, p->next, e);
-    //linkNode(list, p, newNode);
     list->size++;
 }
 
@@ -73,16 +71,8 @@ void listAddByOrder(List* list, Element e) {
     }
 
     Node* newNode = getNode(p->prev, p, e);
-    //linkNode(list, newNode, p);
     list->size++;
 }
-
-//void linkNode(List* list, Node* front, Node* back) {
-    /*
-    Node* newNode = getNode(p->prev, p, e);
-    p->next->prev = newNode;
-    p->next = newNode;*/
-//}
 
 Node* getNode(Node* prevNode, Node* nextNode, Element e) {
     Node* node = (Node*)malloc(sizeof(Node));
