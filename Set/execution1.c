@@ -82,6 +82,7 @@ int main() {
     }
 
     printf("size of s1: %d\n", setSize(&s1));
+    
     for (int i = 1; i < 11; i++) {
         num = i;
         if (setIsMember(&s1, pNumTen)) {
