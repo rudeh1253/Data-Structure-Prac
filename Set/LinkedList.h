@@ -17,7 +17,7 @@ typedef struct _linked_list {
     int size;
     Node* header;
     Node* trailer;
-    _Bool (*func)(Element elements);
+    _Bool (*traversalFunc)(Element elements);
     _Bool (*comparator)(Element element1, Element element2);
     Node* cur;
 } LinkedList;

@@ -2,17 +2,20 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-Node* getNode(Node* prevNode, Node* nextNode, Element e);
 _Bool compare(Element e1, Element e2);
 
 void listInit(List* list) {
     list->size = 0;
-    list->header = getNode(NULL, NULL, NULL_ELEM);
-    list->trailer = getNode(NULL, NULL, NULL_ELEM);
+
+    list->header = (Node*)malloc(sizeof(Node));
+    list->trailer = (Node*)malloc(sizeof(Node));
     list->header->next = list->trailer;
     list->trailer->prev = list->header;
+    list->header->elem = NULL_ELEM;
+    list->trailer->elem = NULL_ELEM;
+
     list->cur = list->header;
-    list->func = NULL;
+    list->traversalFunc = NULL;
     list->comparator = compare;
 }
 
@@ -60,7 +63,12 @@ void listAdd(List* list, int r, Element e) {
         p = p->next;
     }
 
-    Node* newNode = getNode(p, p->next, e);
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->prev = p;
+    newNode->next = p->next;
+    p->next->prev = newNode;
+    p->next = newNode;
+    newNode->elem = e;
     list->size++;
 }
 
@@ -70,21 +78,13 @@ void listAddByOrder(List* list, Element e) {
         p = p->next;
     }
 
-    Node* newNode = getNode(p->prev, p, e);
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->prev = p->prev;
+    newNode->next = p;
+    p->prev->next = newNode;
+    p->prev = newNode;
+    newNode->elem = e;
     list->size++;
-}
-
-Node* getNode(Node* prevNode, Node* nextNode, Element e) {
-    Node* node = (Node*)malloc(sizeof(Node));
-    node->prev = prevNode;
-    node->next = nextNode;
-    if (prevNode != NULL) {
-        prevNode->next = node;
-    }
-    if (nextNode != NULL) {
-        nextNode->prev = node;
-    }
-    node->elem = e;
 }
 
 void listAddFirst(List* list, Element e) {
@@ -181,7 +181,7 @@ Element listGetAt(List* list, int r) {
 void listTraverse(List* list) {
     Node* p = list->header;
 
-    if (list->func == NULL) {
+    if (list->traversalFunc == NULL) {
         for (int i = 0; i < list->size; i++) {
             p = p->next;
             printf("%p ", p->elem);
@@ -189,7 +189,7 @@ void listTraverse(List* list) {
     } else {
         for (int i = 0; i < list->size; i++) {
             p = p->next;
-            if (!list->func(p->elem)) {
+            if (!list->traversalFunc(p->elem)) {
                 break;
             }
         } printf("\n");
@@ -209,7 +209,7 @@ void listDestroy(List* list) {
 }
 
 void listSetTraversalFunction(List* list, _Bool (*func)(Element elements)) {
-    list->func = func;
+    list->traversalFunc = func;
 }
 
 void listSetComparator(List* list, _Bool (*comparator)(Element element1, Element element2)) {

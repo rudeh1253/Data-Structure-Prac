@@ -2,7 +2,7 @@
 #define __LINKED_LIST_SET_H_
 
 #include <stdbool.h>
-#include "../List/LinkedList.h"
+#include "LinkedList.h"
 
 typedef Element SetElem;
 
