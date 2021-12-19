@@ -29,23 +29,27 @@ void setUnionImpl(Set* sUnion, Set* setA, Set* setB) {
     }*/
 
     if (setA->list->cur->next == setA->list->trailer) {
-        if (listToNext(setB->list)) {
+        if (setB->list->cur->next != setB->list->trailer) {
             printf("if1 - %d - %d, %d\n", ++count, *(int*)listGet(setA->list), *(int*)listGet(setB->list));
             setAdd(sUnion, listGet(setB->list));
+            listToNext(setB->list);
             setUnionImpl(sUnion, setA, setB);
         } else {
             printf("if2 - %d - %d, %d\n", ++count, *(int*)listGet(setA->list), *(int*)listGet(setB->list));
             setAdd(sUnion, listGet(setA->list));
+            setAdd(sUnion, listGet(setB->list));
 
             return;
         }
     } else if (setB->list->cur->next == setB->list->trailer) {
-        if (listToNext(setA->list)) {
+        if (setA->list->cur->next != setA->list->trailer) {
             printf("if3 - %d - %d, %d\n", ++count, *(int*)listGet(setA->list), *(int*)listGet(setB->list));
             setAdd(sUnion, listGet(setA->list));
+            listToNext(setA->list);
             setUnionImpl(sUnion, setA, setB);
         } else {
             printf("if4 - %d - %d, %d\n", ++count, *(int*)listGet(setA->list), *(int*)listGet(setB->list));
+            setAdd(sUnion, listGet(setA->list));
             setAdd(sUnion, listGet(setB->list));
 
             return;
