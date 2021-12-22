@@ -5,6 +5,7 @@
         "type_traits": "c",
         "limits": "c",
         "*.tcc": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "setoperation.h": "c"
     }
 }

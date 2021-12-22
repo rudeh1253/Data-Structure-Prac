@@ -92,7 +92,14 @@ void listAddFirst(List* list, Element e) {
 }
 
 void listAddLast(List* list, Element e) {
-    listAdd(list, list->size, e);
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->elem = e;
+    
+    newNode->prev = list->trailer->prev;
+    newNode->next = list->trailer;
+    list->trailer->prev->next = newNode;
+    list->trailer->prev = newNode;
+    list->size++;
 }
 
 Element listDelete(List* list) {
@@ -101,11 +108,15 @@ Element listDelete(List* list) {
         return NULL;
     }
 
-    Element re = list->cur->elem;
+    Node* toDelete = list->cur;
+    Element re = toDelete->elem;
 
     list->cur->next->prev = list->cur->prev;
     list->cur->prev->next = list->cur->next;
-    free(list->cur);
+    list->cur = list->cur->prev;
+    free(toDelete);
+
+    list->size--;
 
     return re;
 }
@@ -133,6 +144,7 @@ Element listDeleteAt(List* list, int r) {
 
     deletedNode->prev->next = deletedNode->next;
     deletedNode->next->prev = deletedNode->prev;
+    list->cur = deletedNode->prev;
     free(deletedNode);
 
     list->size--;

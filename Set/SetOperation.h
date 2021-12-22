@@ -5,6 +5,6 @@
 
 Set setUnion(Set* setA, Set* setB);
 Set setIntersect(Set* setA, Set* setB);
-Set setSubtract(Set* setA, Set* setB);
+Set setSubtract(Set* minuend, Set* subtrahend);
 
 #endif
