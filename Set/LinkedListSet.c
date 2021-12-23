@@ -123,3 +123,7 @@ void emptySetException();
 void setEqualityComparator(Set* set, _Bool (*equalityComparator)(SetElem e1, SetElem e2)) {
     set->equalityComparator = equalityComparator;
 }
+
+void setPrintAll(Set* set, void (*method)(Element e)) {
+    listPrintAll(set->list, method);
+}

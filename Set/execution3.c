@@ -5,7 +5,7 @@
 
 typedef int Data;
 
-void printElem(Element* e) {
+void printElem(Element e) {
     printf("%d ", *(int*)e);
 }
 

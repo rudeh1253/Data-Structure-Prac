@@ -228,7 +228,7 @@ void listSetComparator(List* list, _Bool (*comparator)(Element element1, Element
     list->comparator = comparator;
 }
 
-void listPrintAll(List* list, void (*printFunc)(Element* e)) {
+void listPrintAll(List* list, void (*printFunc)(Element e)) {
     if (!listToFirst(list)) {
 
         return;
