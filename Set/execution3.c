@@ -19,7 +19,6 @@ Set arrToSet(Data arr[], int length) {
     void** pArr = (void**)malloc(length * sizeof(void*));
 
     for (int i = 0; i < length; i++) {
-        pArr[i] = malloc(sizeof(arr[0]));
         pArr[i] = &arr[i];
     }
 
@@ -29,6 +28,8 @@ Set arrToSet(Data arr[], int length) {
     for (int i = 0; i < length; i++) {
         setAdd(&set, pArr[i]);
     }
+
+    free(pArr);
 
     return set;
 }

@@ -15,12 +15,10 @@ Set setExp(ArrElem intArr1[], ArrElem intArr2[], int intArr1Len, int intArr2Len)
     void** pArr2 = (void**)malloc(intArr2Len * sizeof(void*));
 
     for (int i = 0; i < intArr1Len; i++) {
-        pArr1[i] = malloc(sizeof(ArrElem));
         pArr1[i] = &intArr1[i];
     }
 
     for (int i = 0; i < intArr2Len; i++) {
-        pArr2[i] = malloc(sizeof(ArrElem));
         pArr2[i] = &intArr2[i];
     }
 
@@ -46,6 +44,9 @@ Set setExp(ArrElem intArr1[], ArrElem intArr2[], int intArr1Len, int intArr2Len)
     listPrintAll(unionSet.list, printElem);
     printf("\n");
     printf("size of union: %d\n", setSize(&unionSet));
+
+    free(pArr1);
+    free(pArr2);
 
     return unionSet;
 }

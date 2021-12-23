@@ -155,6 +155,13 @@ Set setSubtract(Set* minuend, Set* subtrahend) {
 }
 
 void setSubtractImpl(Set* minuend, Set* subtrahend) {
+    /*
+     * listDelete를 통해 반환받은 void pointer가 가리키는 memory는 stack 영역의 memory일 수 있고
+     * heap 영역의 memory일 수 있다. Element가 둘 중에 어떤 것에 해당하는지는 이 모듈을 사용하는 사용자만이 알고 있다.
+     * listDelete 메소드를 통해 반환된 값을 그대로 user에게 전달하여 메모리 해제를 사용자에게 인가하는
+     * 방법은 구현하기 번거롭고 또 그렇게 할 필요도 없다.
+     * 사용자가 정의한 Element 삭제 절차를 입력받는 방법이 가장 적절한 방법이다.
+     */
     if (minuend->list->cur->next == minuend->list->trailer) {
         if (setIsMember(subtrahend, listGet(minuend->list))) {
             Element e = listDelete(minuend->list);
