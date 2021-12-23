@@ -20,7 +20,7 @@ _Bool setIsEmpty(Set* set);
 // iterator elemtents()
 
 _Bool setIsMember(Set* set, SetElem e);
-_Bool isSubset(Set* setA, Set* setB); // whether setA is a subset of setB; if setA is a subset of setB, return true, or not, return false
+_Bool isSubset(Set* subset, Set* superset);
 
 void setAdd(Set* set, SetElem e);
 SetElem setRemove(Set* set, SetElem e);

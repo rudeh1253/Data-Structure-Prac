@@ -49,9 +49,9 @@ _Bool setIsMember(Set* set, SetElem e) {
     return false;
 }
 
-_Bool isSubset(Set* setA, Set* setB) {
-    if (!listToFirst(setB->list)) {
-        if (!listToFirst(setA->list)) {
+_Bool isSubset(Set* subset, Set* superset) {
+    if (!listToFirst(superset->list)) {
+        if (!listToFirst(subset->list)) {
 
             return true;
         } else {
@@ -59,17 +59,17 @@ _Bool isSubset(Set* setA, Set* setB) {
             return false;
         }
     } else {
-        if (!listToFirst(setA->list)) {
+        if (!listToFirst(subset->list)) {
 
             return true;
-        } else if (!setIsMember(setB, listGet(setA->list))) {
+        } else if (!setIsMember(superset, listGet(subset->list))) {
 
             return false;
         }
     }
 
-    while (listToNext(setA->list)) {
-        if (!setIsMember(setB, listGet(setA->list))) {
+    while (listToNext(subset->list)) {
+        if (!setIsMember(superset, listGet(subset->list))) {
             
             return false;
         }
