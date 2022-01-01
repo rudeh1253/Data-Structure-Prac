@@ -6,6 +6,7 @@
         "limits": "c",
         "*.tcc": "c",
         "stdlib.h": "c",
-        "setoperation.h": "c"
+        "setoperation.h": "c",
+        "linkedliststack.h": "c"
     }
 }

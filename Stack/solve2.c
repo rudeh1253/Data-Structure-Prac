@@ -5,7 +5,7 @@
  */
 
 #include <stdio.h>
-#include "../../Stack/LinkedListStack.h"
+#include "LinkedListStack.h"
 
 void getSpanArr(int X[], int S[], int n);
 void getSpan(int X[], int S[], int n, Stack* stack);

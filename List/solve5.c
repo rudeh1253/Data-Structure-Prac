@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../List/LinkedList.h"
+#include "LinkedList.h"
 
 List* getPolynomialList(int numArr[], int arrLen) {
     List* polynomialList = (List*)malloc(sizeof(List));

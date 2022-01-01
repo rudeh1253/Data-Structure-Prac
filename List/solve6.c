@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "../../List/LinkedList.h"
+#include "LinkedList.h"
 
 int main() {
     const int OPERATION_COUNT = 18;
