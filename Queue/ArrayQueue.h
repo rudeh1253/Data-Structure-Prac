@@ -21,8 +21,8 @@ bool enqueue(Queue* queue, QElem e);
 QElem dequeue(Queue* queue);
 
 QElem qFront(Queue* queue);
-bool isEmpty(Queue* queue);
-bool isFull(Queue* queue);
+bool qIsEmpty(Queue* queue);
+bool qIsFull(Queue* queue);
 int qSize(Queue* queue);
 
 bool fullQueueException();

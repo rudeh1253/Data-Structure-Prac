@@ -7,7 +7,7 @@ void queueInit(Queue* queue) {
 }
 
 bool enqueue(Queue* queue, QElem e) {
-    if (isFull(queue)) {
+    if (qIsFull(queue)) {
 
         return fullQueueException();
     }
@@ -19,7 +19,7 @@ bool enqueue(Queue* queue, QElem e) {
 }
 
 QElem dequeue(Queue* queue) {
-    if (isEmpty(queue)) {
+    if (qIsEmpty(queue)) {
         
         return emptyQueueException();
     }
@@ -32,7 +32,7 @@ QElem dequeue(Queue* queue) {
 }
 
 QElem qFront(Queue* queue) {
-    if (isEmpty(queue)) {
+    if (qIsEmpty(queue)) {
         
         return emptyQueueException();
     }
@@ -40,12 +40,12 @@ QElem qFront(Queue* queue) {
     return queue->queue[queue->f];
 }
 
-bool isEmpty(Queue* queue) {
+bool qIsEmpty(Queue* queue) {
     
     return (queue->r + 1) % MAX_LEN == queue->f;
 }
 
-bool isFull(Queue* queue) {
+bool qIsFull(Queue* queue) {
 
     return (queue->r + 2) % MAX_LEN == queue->f;
 }

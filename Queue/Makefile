@@ -1,8 +1,8 @@
-a.out: execution1.o ArrayQueue.o
-	gcc -o a.out execution1.o ArrayQueue.o
+a.out: execution2.o LinkedListQueue.o
+	gcc -o a.out execution2.o LinkedListQueue.o
 
-execution1.o: ArrayQueue.h execution1.c
-	gcc -c -o execution1.o execution1.c
+execution2.o: LinkedListQueue.h execution2.c
+	gcc -c -o execution2.o execution2.c
 
-ArrayQueue.o: ArrayQueue.h ArrayQueue.c
-	gcc -c -o ArrayQueue.o ArrayQueue.c
+LinkedListQueue.o: LinkedListQueue.h LinkedListQueue.c
+	gcc -c -o LinkedListQueue.o LinkedListQueue.c
