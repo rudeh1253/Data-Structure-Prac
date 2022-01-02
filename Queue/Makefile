@@ -6,3 +6,7 @@ execution2.o: LinkedListQueue.h execution2.c
 
 LinkedListQueue.o: LinkedListQueue.h LinkedListQueue.c
 	gcc -c -o LinkedListQueue.o LinkedListQueue.c
+
+clean:
+	rm *.o
+	rm a.out
